@@ -13,20 +13,11 @@ def get_token_privileges(PID):
     :return: None
     """
 
-    process = win32api.OpenProcess(
-        win32con.PROCESS_QUERY_INFORMATION,
-        False,
-        PID
-    )
+    process = win32api.OpenProcess(win32con.PROCESS_QUERY_INFORMATION, False, PID)
 
-    token = WINSEC.OpenProcessToken(
-        process,
-        WINSEC.TOKEN_QUERY
-    )
+    token = WINSEC.OpenProcessToken(process, WINSEC.TOKEN_QUERY)
 
-    privileges = WINSEC.GetTokenInformation(
-        token, WINSEC.TokenPrivileges
-    )
+    privileges = WINSEC.GetTokenInformation(token, WINSEC.TokenPrivileges)
 
     for luid, attributes in privileges:
         try:
